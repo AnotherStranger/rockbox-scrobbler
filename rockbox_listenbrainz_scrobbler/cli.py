@@ -20,6 +20,7 @@ def upload_rockbox(
             hide_input=True,
         ),
     ],
+    listening_from: Annotated[str, typer.Option()] = "rockbox",
 ):
     scrobbles = []
     with rockbox_scrobbler_log_path.open(
@@ -52,6 +53,8 @@ def upload_rockbox(
             artist_name=listen.artist,
             release_name=listen.album,
             listened_at=listen.timestamp,
+            recording_mbid=listen.musicbrainz_trackid,
+            listening_from=listening_from,
         )
         for listen in scrobbles
     ]
