@@ -14,3 +14,4 @@ class ScrobblerEntry(BaseModel):
     musicbrainz_trackid: str = Field(
         validation_alias=AliasChoices("musicbrainz_trackid", "#MUSICBRAINZ_TRACKID")
     )
+    listening_from: str = "rockbox"

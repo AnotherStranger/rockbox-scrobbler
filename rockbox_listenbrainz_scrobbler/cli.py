@@ -6,6 +6,7 @@ import typer
 from typing_extensions import Annotated
 
 from rockbox_listenbrainz_scrobbler.model import ScrobblerEntry
+from rockbox_listenbrainz_scrobbler.scrobbling import ListenBrainzScrobbler
 
 app = typer.Typer()
 
@@ -45,24 +46,12 @@ def upload_rockbox(
             ],
         )
         for row in reader:
-            scrobbles += [ScrobblerEntry(**row)]
+            scrobbles += [
+                ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
+            ]
 
-    listens = [
-        pylistenbrainz.Listen(
-            track_name=listen.title,
-            artist_name=listen.artist,
-            release_name=listen.album,
-            listened_at=listen.timestamp,
-            recording_mbid=listen.musicbrainz_trackid,
-            listening_from=listening_from,
-        )
-        for listen in scrobbles
-    ]
-
-    client = pylistenbrainz.ListenBrainz()
-    client.set_auth_token(auth_token)
-
-    client.submit_multiple_listens(listens)
+    client = ListenBrainzScrobbler(auth_token)
+    client.scrobble_multiple(scrobbles)
 
 
 def main():
