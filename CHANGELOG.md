@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.0.0...v1.0.1) (2024-02-23)
+
+
+### Bug Fixes
+
+* use correct glob for release binaries ([495c7de](https://github.com/AnotherStranger/rockbox-scrobbler/commit/495c7de6139850ffb486c6388d81df3746146bd6))
+
 ## 1.0.0 (2024-02-23)
 
 
