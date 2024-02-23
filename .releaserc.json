@@ -159,6 +159,10 @@
           {
             "path": "dist/*.whl",
             "label": "Wheel distribution"
+          },
+          {
+            "path": "artifacts/*",
+            "label": "Binaries"
           }
         ]
       }
