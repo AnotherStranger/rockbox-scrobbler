@@ -119,7 +119,6 @@
         }
       }
     ],
-    ,
     [
       "@google/semantic-release-replace-plugin",
       {
@@ -147,7 +146,6 @@
         "prepareCmd": "poetry build"
       }
     ],
-
     [
       "@semantic-release/github",
       {
