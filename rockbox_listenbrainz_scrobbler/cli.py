@@ -2,30 +2,36 @@ import sys
 from pathlib import Path
 
 import typer
-from PySide6 import QtWidgets
 from typing_extensions import Annotated
 
+from rockbox_listenbrainz_scrobbler import ui
 from rockbox_listenbrainz_scrobbler.scrobbling import (
     ListenBrainzScrobbler,
     read_rockbox_log,
 )
-from rockbox_listenbrainz_scrobbler.ui import ListenbrainzWidget
 
 app = typer.Typer()
 
 
 @app.command()
 def upload_rockbox(
-    rockbox_scrobbler_log_path: Path,
+    rockbox_scrobbler_log_path: Annotated[
+        Path, typer.Argument(help="Path to the .scrobbler.log file.")
+    ],
     auth_token: Annotated[
         str,
         typer.Option(
-            prompt="Please provide your listenbrainz Token (input hidden)",
+            prompt="Please provide your Listenbrainz Token (input hidden)",
             hide_input=True,
         ),
     ],
-    listening_from: Annotated[str, typer.Option()] = "rockbox",
+    listening_from: Annotated[
+        str, typer.Option(help="Name of the app. You can choose any name here.")
+    ] = "rockbox",
 ):
+    """
+    Uploads a .scrobbler.log file to Listenbrainz
+    """
     scrobbles = read_rockbox_log(rockbox_scrobbler_log_path, listening_from)
     client = ListenBrainzScrobbler(auth_token)
     client.scrobble_multiple(scrobbles)
@@ -33,11 +39,10 @@ def upload_rockbox(
 
 @app.command()
 def launch_ui():
-    qt_app = QtWidgets.QApplication([])
-    widget = ListenbrainzWidget()
-    widget.resize(800, 600)
-    widget.show()
-    sys.exit(qt_app.exec())
+    """
+    Launches a simple PyQt app for Scrobbling
+    """
+    sys.exit(ui.launch())
 
 
 def main():
