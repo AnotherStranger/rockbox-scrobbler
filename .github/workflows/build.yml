@@ -10,37 +10,6 @@ on:
       - fix/
 
 jobs:
-  pyinstaller-build-windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.10'
-
-      - name: Install Poetry
-        run: |
-          pip install poetry
-          poetry config virtualenvs.create false
-
-      - name: Install dependencies
-        run: poetry install
-
-      - name: Generate requirements.txt
-        run: poetry export --format requirements.txt --output requirements.txt
-
-      - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
-        with:
-          python_ver: '3.10'
-          spec: 'ui.spec'
-          requirements: ${{ github.workspace }}/requirements.txt  # Pass the path to requirements.txt explicitly
-          upload_exe_with_name: 'Rockbox Listenbrainz Scrobbler'
-          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed
-
   pyinstaller-build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -60,14 +29,12 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Generate requirements.txt
-        run: poetry export --format requirements.txt --output requirements.txt
-
-      - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
+      - name: Package Application
+        uses: JackMcKew/pyinstaller-action-linux@main
         with:
-          python_ver: '3.10'
-          spec: 'ui.spec'
-          requirements: ${{ github.workspace }}/requirements.txt  # Pass the path to requirements.txt explicitly
-          upload_exe_with_name: 'Rockbox Listenbrainz Scrobbler'
-          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed
+          spec: ui.spec
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: rockbox-scrobbler-ui
+          path: dist/linux
