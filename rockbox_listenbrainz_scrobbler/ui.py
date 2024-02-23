@@ -5,6 +5,7 @@ from pylistenbrainz.errors import (
     InvalidAuthTokenException,
     InvalidSubmitListensPayloadException,
 )
+from PySide6 import QtWidgets
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import (
     QFileDialog,
@@ -26,6 +27,14 @@ from rockbox_listenbrainz_scrobbler.scrobbling import (
 
 # Global constants
 LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY: str = "Listenbrainz/auth-token"
+
+
+def launch():
+    qt_app = QtWidgets.QApplication([])
+    widget = ListenbrainzWidget()
+    widget.resize(800, 600)
+    widget.show()
+    return qt_app.exec()
 
 
 def show_error(text: str):
@@ -147,3 +156,7 @@ class ListenbrainzWidget(QWidget):
             show_error("The given auth token is invalid.")
         except InvalidSubmitListensPayloadException:
             show_error("Could not submit listen. Maybe your log file is ill formatted.")
+
+
+if __name__ == "__main__":
+    launch()
