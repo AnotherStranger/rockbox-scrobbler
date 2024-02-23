@@ -10,8 +10,13 @@ on:
       - fix/
 
 jobs:
-  pyinstaller-build-linux:
-    runs-on: ubuntu-latest
+  nuitka-build:
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+
+    runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -33,12 +38,15 @@ jobs:
         uses: Nuitka/Nuitka-Action@main
         with:
           nuitka-version: main
+          enable-plugins: pyside6
           script-name: rockbox_listenbrainz_scrobbler/ui.py
           onefile: true
 
-      # Uploads artifact
-      - name: Upload Artifact
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: bin
-          path: build/hello_world.bin
+          name: ${{ runner.os }} Build
+          path: |
+            build/*.exe
+            build/*.bin
+            build/*.app/**/*
