@@ -40,6 +40,7 @@ jobs:
           nuitka-version: main
           enable-plugins: pyside6
           script-name: rockbox_listenbrainz_scrobbler/ui.py
+          output-file: rockbox-listenbrainz
           onefile: true
 
       - name: Upload Artifacts
@@ -85,4 +86,4 @@ jobs:
         with:
           node-version: "lts/*"
       - name: Release
-        run: npx --package @semantic-release/git --package @semantic-release/changelog --package conventional-changelog-conventionalcommits --package @google/semantic-release-replace-plugin semantic-release
+        run: npx --package @semantic-release/git --package @semantic-release/exec --package @semantic-release/changelog --package conventional-changelog-conventionalcommits --package semantic-release-replace-plugin semantic-release
