@@ -10,6 +10,7 @@ python = ">=3.10,<3.13"
 pylistenbrainz = "^0.5.1"
 typer = { extras = ["all"], version = "^0.9.0" }
 pydantic = "^2.6.1"
+pyside6 = "^6.6.2"
 
 [tool.poetry.scripts]
 rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
@@ -19,6 +20,7 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 pylint = "^3.0.3"
 black = "^24.2.0"
 pyinstaller = "^6.4.0"
+pre-commit = "^3.6.2"
 
 [build-system]
 requires = ["poetry-core"]
