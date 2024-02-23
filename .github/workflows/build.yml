@@ -39,8 +39,7 @@ jobs:
         with:
           nuitka-version: main
           enable-plugins: pyside6
-          script-name: rockbox_listenbrainz_scrobbler/ui.py
-          output-file: rockbox-listenbrainz
+          script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz.py
           onefile: true
 
       - name: Upload Artifacts
