@@ -159,7 +159,7 @@
             "label": "Wheel distribution"
           },
           {
-            "path": "artifacts/*",
+            "path": "artifacts/**/*",
             "label": "Binaries"
           }
         ]
