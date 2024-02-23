@@ -10,32 +10,26 @@ on:
       - fix/
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  pyinstaller-build-windows:
+    runs-on: windows-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.10'
+          spec: 'ui.spec'
+          requirements: 'pyproject.toml'
+          upload_exe_with_name: 'Rockbox Listenbrainz Scrobbler'
+          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed,
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install poetry
-        poetry config virtualenvs.create false
-        poetry install
-
-    - name: Build package with Poetry
-      run: poetry build
-
-    - name: Run PyInstaller on ui.spec
-      run: pyinstaller ui.spec
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        path: dist/*
+  pyinstaller-build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.10'
+          spec: 'ui.spec'
+          requirements: 'pyproject.toml'
+          upload_exe_with_name: 'Rockbox Listenbrainz Scrobbler'
+          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed,
