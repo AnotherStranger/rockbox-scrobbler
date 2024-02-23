@@ -85,4 +85,6 @@ jobs:
         with:
           node-version: "lts/*"
       - name: Release
+        env:
+          GITHUB_TOKEN: "${{ secrets.GH_TOKEN }}"
         run: npx --package @semantic-release/git --package @semantic-release/exec --package @semantic-release/changelog --package conventional-changelog-conventionalcommits --package semantic-release-replace-plugin semantic-release
