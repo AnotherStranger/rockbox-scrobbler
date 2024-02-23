@@ -1,5 +1,7 @@
+import csv
 from abc import ABC, abstractmethod
-from typing import Iterable
+from pathlib import Path
+from typing import Iterable, List
 
 from pylistenbrainz import Listen, ListenBrainz
 
@@ -23,7 +25,6 @@ class AbstractScrobbler(ABC):
 
 
 class ListenBrainzScrobbler(AbstractScrobbler):
-
     def __init__(self, auth_token: str) -> None:
         super().__init__()
 
@@ -47,3 +48,35 @@ class ListenBrainzScrobbler(AbstractScrobbler):
         ]
 
         self.client.submit_multiple_listens(listens)
+
+
+def read_rockbox_log(
+    rockbox_scrobbler_log_path: Path, listening_from: str = "rockbox"
+) -> List[ScrobblerEntry]:
+    scrobbles = []
+    with rockbox_scrobbler_log_path.open(
+        "r",
+        encoding="utf8",
+        newline="",
+    ) as fp_scrobbler:
+        for _ in range(4):  # skip header
+            fp_scrobbler.readline()
+        reader = csv.DictReader(
+            fp_scrobbler,
+            delimiter="\t",
+            fieldnames=[
+                "#ARTIST",
+                "#ALBUM",
+                "#TITLE",
+                "#TRACKNUM",
+                "#LENGTH",
+                "#RATING",
+                "#TIMESTAMP",
+                "#MUSICBRAINZ_TRACKID",
+            ],
+        )
+        for row in reader:
+            scrobbles += [
+                ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
+            ]
+    return scrobbles

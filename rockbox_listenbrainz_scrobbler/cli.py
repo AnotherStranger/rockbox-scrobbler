@@ -1,12 +1,15 @@
-import csv
+import sys
 from pathlib import Path
 
-import pylistenbrainz
 import typer
+from PySide6 import QtWidgets
 from typing_extensions import Annotated
 
-from rockbox_listenbrainz_scrobbler.model import ScrobblerEntry
-from rockbox_listenbrainz_scrobbler.scrobbling import ListenBrainzScrobbler
+from rockbox_listenbrainz_scrobbler.scrobbling import (
+    ListenBrainzScrobbler,
+    read_rockbox_log,
+)
+from rockbox_listenbrainz_scrobbler.ui import ListenbrainzWidget
 
 app = typer.Typer()
 
@@ -23,35 +26,18 @@ def upload_rockbox(
     ],
     listening_from: Annotated[str, typer.Option()] = "rockbox",
 ):
-    scrobbles = []
-    with rockbox_scrobbler_log_path.open(
-        "r",
-        encoding="utf8",
-        newline="",
-    ) as fp_scrobbler:
-        for _ in range(4):  # skip header
-            fp_scrobbler.readline()
-        reader = csv.DictReader(
-            fp_scrobbler,
-            delimiter="\t",
-            fieldnames=[
-                "#ARTIST",
-                "#ALBUM",
-                "#TITLE",
-                "#TRACKNUM",
-                "#LENGTH",
-                "#RATING",
-                "#TIMESTAMP",
-                "#MUSICBRAINZ_TRACKID",
-            ],
-        )
-        for row in reader:
-            scrobbles += [
-                ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
-            ]
-
+    scrobbles = read_rockbox_log(rockbox_scrobbler_log_path, listening_from)
     client = ListenBrainzScrobbler(auth_token)
     client.scrobble_multiple(scrobbles)
+
+
+@app.command()
+def launch_ui():
+    qt_app = QtWidgets.QApplication([])
+    widget = ListenbrainzWidget()
+    widget.resize(800, 600)
+    widget.show()
+    sys.exit(qt_app.exec())
 
 
 def main():
