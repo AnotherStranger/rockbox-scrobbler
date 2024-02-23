@@ -19,8 +19,8 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.0.3"
 black = "^24.2.0"
-pyinstaller = "^6.4.0"
 pre-commit = "^3.6.2"
+nuitka = "^2.0.3"
 
 [build-system]
 requires = ["poetry-core"]

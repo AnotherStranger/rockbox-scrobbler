@@ -46,7 +46,7 @@ def show_error(text: str):
     msg.setText("Error")
     msg.setInformativeText(text)
     msg.setWindowTitle("Error")
-    msg.exec_()
+    msg.exec()
 
 
 class ListenbrainzWidget(QWidget):

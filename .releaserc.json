@@ -44,11 +44,7 @@
           }
         ],
         "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES",
-            "BREAKING"
-          ]
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
         }
       }
     ],
@@ -60,12 +56,24 @@
           "types": [
             { "type": "build", "section": "Build System", "hidden": false },
             { "type": "chore", "section": "Build System", "hidden": false },
-            { "type": "ci", "section": "Continuous Integration", "hidden": false },
+            {
+              "type": "ci",
+              "section": "Continuous Integration",
+              "hidden": false
+            },
             { "type": "docs", "section": "Documentation", "hidden": false },
             { "type": "feat", "section": "Features", "hidden": false },
             { "type": "fix", "section": "Bug Fixes", "hidden": false },
-            { "type": "perf", "section": "Performance Improvements", "hidden": false },
-            { "type": "refactor", "section": "Code Refactoring", "hidden": false },
+            {
+              "type": "perf",
+              "section": "Performance Improvements",
+              "hidden": false
+            },
+            {
+              "type": "refactor",
+              "section": "Code Refactoring",
+              "hidden": false
+            },
             { "type": "style", "section": "Styles", "hidden": false },
             { "type": "test", "section": "Tests", "hidden": false }
           ]
@@ -104,22 +112,60 @@
           }
         ],
         "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES",
-            "BREAKING"
-          ]
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
         },
         "writerOpts": {
-          "commitsSort": [
-            "subject",
-            "scope"
-          ]
+          "commitsSort": ["subject", "scope"]
         }
       }
     ],
+    ,
     [
-      "@semantic-release/github"
+      "@google/semantic-release-replace-plugin",
+      {
+        "replacements": [
+          {
+            "files": ["pyproject.toml"],
+            "from": "\nversion = \".*\"\n",
+            "to": "\nversion = \"${nextRelease.version}\"\n",
+            "results": [
+              {
+                "file": "pyproject.toml",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "poetry build"
+      }
+    ],
+
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/*.tar.gz",
+            "label": "Source distribution"
+          },
+          {
+            "path": "dist/*.whl",
+            "label": "Wheel distribution"
+          },
+          {
+            "path": "artifacts/*",
+            "label": "Binaries"
+          }
+        ]
+      }
     ],
     [
       "@semantic-release/changelog",
@@ -131,9 +177,7 @@
       "@semantic-release/git",
       {
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}",
-        "assets": [
-          "CHANGELOG.md"
-        ]
+        "assets": ["CHANGELOG.md"]
       }
     ]
   ]
