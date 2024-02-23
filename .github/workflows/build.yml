@@ -32,7 +32,7 @@ jobs:
       - name: Package Application
         uses: JackMcKew/pyinstaller-action-linux@python3.10
         with:
-          spec: ui.spec
+          spec: rockbox-scrobbler-ui.spec
           path: ./
 
       - uses: actions/upload-artifact@v2
