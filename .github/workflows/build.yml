@@ -29,13 +29,16 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Package Application
-        uses: JackMcKew/pyinstaller-action-linux@python3.10
+      - name: Build Executable
+        uses: Nuitka/Nuitka-Action@main
         with:
-          spec: rockbox-scrobbler-ui.spec
-          path: ./
+          nuitka-version: main
+          script-name: rockbox_listenbrainz_scrobbler/ui.py
+          onefile: true
 
-      - uses: actions/upload-artifact@v2
+      # Uploads artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: rockbox-scrobbler-ui
-          path: ./dist/
+          name: bin
+          path: build/hello_world.bin
