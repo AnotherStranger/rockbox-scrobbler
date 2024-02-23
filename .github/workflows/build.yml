@@ -13,23 +13,61 @@ jobs:
   pyinstaller-build-windows:
     runs-on: windows-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          poetry config virtualenvs.create false
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Generate requirements.txt
+        run: poetry export --format requirements.txt --output requirements.txt
+
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
           python_ver: '3.10'
           spec: 'ui.spec'
-          requirements: 'pyproject.toml'
+          requirements: 'requirements.txt'
           upload_exe_with_name: 'Rockbox Listenbrainz Scrobbler'
-          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed,
+          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed
 
   pyinstaller-build-linux:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          poetry config virtualenvs.create false
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Generate requirements.txt
+        run: poetry export --format requirements.txt --output requirements.txt
+
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
           python_ver: '3.10'
           spec: 'ui.spec'
-          requirements: 'pyproject.toml'
+          requirements: 'requirements.txt'
           upload_exe_with_name: 'Rockbox Listenbrainz Scrobbler'
-          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed,
+          options: --onefile, --name "Rockbox Listenbrainz Scrobbler", --windowed
