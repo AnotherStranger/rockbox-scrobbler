@@ -25,6 +25,4 @@ jobs:
         with:
           node-version: "lts/*"
       - name: Release
-        env:
-          GH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
         run: npx --package @semantic-release/git --package @semantic-release/changelog --package conventional-changelog-conventionalcommits semantic-release
