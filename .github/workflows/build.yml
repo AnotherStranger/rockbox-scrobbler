@@ -30,11 +30,12 @@ jobs:
         run: poetry install
 
       - name: Package Application
-        uses: JackMcKew/pyinstaller-action-linux@main
+        uses: JackMcKew/pyinstaller-action-linux@python3.10
         with:
           spec: ui.spec
+          path: ./
 
       - uses: actions/upload-artifact@v2
         with:
           name: rockbox-scrobbler-ui
-          path: dist/linux
+          path: ./dist/
