@@ -4,7 +4,7 @@ from pathlib import Path
 import typer
 from typing_extensions import Annotated
 
-from rockbox_listenbrainz_scrobbler import rockbox_listenbrainz
+from rockbox_listenbrainz_scrobbler import rockbox_listenbrainz_ui
 from rockbox_listenbrainz_scrobbler.scrobbling import (
     ListenBrainzScrobbler,
     read_rockbox_log,
@@ -42,7 +42,7 @@ def launch_ui():
     """
     Launches a simple PyQt app for Scrobbling
     """
-    sys.exit(rockbox_listenbrainz.launch())
+    sys.exit(rockbox_listenbrainz_ui.launch())
 
 
 def main():

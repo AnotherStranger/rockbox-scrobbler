@@ -39,7 +39,7 @@ jobs:
         with:
           nuitka-version: main
           enable-plugins: pyside6
-          script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz.py
+          script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz_ui.py
           onefile: true
 
       - name: Upload Artifacts
@@ -68,7 +68,7 @@ jobs:
           path: artifacts/
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
