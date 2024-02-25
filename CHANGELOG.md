@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.0.1...v1.1.0) (2024-02-25)
+
+
+### Features
+
+* command to print version ([4aaf52e](https://github.com/AnotherStranger/rockbox-scrobbler/commit/4aaf52ed29edb9d8c9f369fea65387a21ceb92da))
+
 ## [1.0.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.0.0...v1.0.1) (2024-02-23)
 
 
