@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.2...v1.1.3) (2024-02-25)
+
+
+### Bug Fixes
+
+* artifacts path ([5c3633f](https://github.com/AnotherStranger/rockbox-scrobbler/commit/5c3633f0b71fae0369ead4cc036a6af692cd58bd))
+
 ## [1.1.2](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.1...v1.1.2) (2024-02-25)
 
 
