@@ -43,7 +43,7 @@ jobs:
           onefile: true
 
       - name: Zip Artifacts
-        run: zip -r ${{ runner.os }}-artifacts.zip build/*
+        run: zip -r artifacts.zip build/*.exe build/*.bin build/*.app/**
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
