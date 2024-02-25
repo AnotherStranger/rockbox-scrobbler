@@ -42,14 +42,15 @@ jobs:
           script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz_ui.py
           onefile: true
 
+      - name: Zip Artifacts
+        run: zip -r ${{ runner.os }}-artifacts.zip build/*
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ runner.os }} Build
-          path: |
-            build/*.exe
-            build/*.bin
-            build/*.app/**/*
+          path: ${{ runner.os }}-artifacts.zip
+
   release:
     name: Release
     needs: build
