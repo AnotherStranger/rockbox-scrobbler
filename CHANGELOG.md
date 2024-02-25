@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.1...v1.1.2) (2024-02-25)
+
+
+### Bug Fixes
+
+* name Release artifacts better to avoid confusion ([f801441](https://github.com/AnotherStranger/rockbox-scrobbler/commit/f801441ae68c9de8c3ebe779bf575ae342608627))
+
 ## [1.1.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.0...v1.1.1) (2024-02-25)
 
 
