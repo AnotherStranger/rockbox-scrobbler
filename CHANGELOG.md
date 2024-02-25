@@ -1,3 +1,13 @@
+## [1.1.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.0...v1.1.1) (2024-02-25)
+
+
+### Bug Fixes
+
+* do not zip the whole dist folder ([2e0e698](https://github.com/AnotherStranger/rockbox-scrobbler/commit/2e0e6982e641233e94fc545d7af7199a64adc8af))
+* include target in zip name again ([6ae21a6](https://github.com/AnotherStranger/rockbox-scrobbler/commit/6ae21a68f2c63776a1fb8fa1b92e5af2f7bc48b4))
+* name builds differently for inclusion in release ([718a68f](https://github.com/AnotherStranger/rockbox-scrobbler/commit/718a68fada7a27e43c9dfb003ee850cf9619c6e4))
+* use different zip on windows runner ([f82b8eb](https://github.com/AnotherStranger/rockbox-scrobbler/commit/f82b8eb52a69d818cc9cbaa5e1023ba85821f49c))
+
 ## [1.1.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.0.1...v1.1.0) (2024-02-25)
 
 
