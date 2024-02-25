@@ -43,7 +43,12 @@ jobs:
           onefile: true
 
       - name: Zip Artifacts
-        run: zip -r artifacts.zip build/*.exe build/*.bin build/*.app/**
+        if: runner.os == 'Windows'
+        run: Compress-Archive -Path build/*.exe, build/*.bin, build/*.app -DestinationPath artifacts.zip
+
+      - name: Zip Artifacts
+        if: runner.os != 'Windows'
+        run: zip -r artifacts.zip build/*.exe build/*.bin build/*.app/*
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
