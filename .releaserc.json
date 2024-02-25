@@ -159,8 +159,16 @@
             "label": "Wheel distribution"
           },
           {
-            "path": "artifacts/**/*",
-            "label": "Binaries"
+            "path": "Linux-artifacts.zip",
+            "label": "Linux-Binaries"
+          },
+          {
+            "path": "Windows-artifacts.zip",
+            "label": "Windows-Binaries"
+          },
+          {
+            "path": "macOS-artifacts.zip",
+            "label": "macOS-Binaries"
           }
         ]
       }
