@@ -14,7 +14,6 @@ from PySide6.QtWidgets import (
     QLabel,
     QLineEdit,
     QMessageBox,
-    QProgressBar,
     QPushButton,
     QTextEdit,
     QVBoxLayout,
@@ -47,6 +46,18 @@ def show_error(text: str):
     msg.setText("Error")
     msg.setInformativeText(text)
     msg.setWindowTitle("Error")
+    msg.exec()
+
+
+def show_info(text: str):
+    """
+    Display an error message with the given text
+    """
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.setText("Success")
+    msg.setInformativeText(text)
+    msg.setWindowTitle("Success")
     msg.exec()
 
 
@@ -103,10 +114,6 @@ class ListenbrainzWidget(QWidget):
         buttons_layout.addWidget(self.submit_button)
         layout.addLayout(buttons_layout)
 
-        # Progress bar
-        self.progress_bar = QProgressBar(self)
-        layout.addWidget(self.progress_bar)
-
         # Read-only text edit area
         self.text_edit = QTextEdit(self)
         self.text_edit.setReadOnly(True)
@@ -146,13 +153,10 @@ class ListenbrainzWidget(QWidget):
 
         try:
             scrobbles = read_rockbox_log(self.selected_file)
-            total_scrobbles = len(scrobbles)
-            self.progress_bar.setMaximum(total_scrobbles)
             client = ListenBrainzScrobbler(auth_token)
 
-            for i, scrobble in enumerate(scrobbles):
-                self.progress_bar.setValue(i + 1)
-                client.scrobble(scrobble)
+            client.scrobble_multiple(scrobbles)
+            show_info("Successfully uploaded your Listens.")
         except ValidationError:
             show_error(
                 "Could not parse the given File. Did you choose a Rockbox .scrobbler.log?"
