@@ -9,6 +9,7 @@ from PySide6 import QtWidgets
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import (
     QFileDialog,
+    QGroupBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -65,8 +66,9 @@ class ListenbrainzWidget(QWidget):
         self.setLayout(layout)
 
         # Input field for auth token
+        settings_group = QGroupBox("Settings")
         auth_layout = QHBoxLayout()
-        layout.addLayout(auth_layout)
+        # layout.addLayout(auth_layout)
 
         auth_label = QLabel("Enter User Token:", self)
         auth_layout.addWidget(auth_label)
@@ -83,6 +85,8 @@ class ListenbrainzWidget(QWidget):
             )
 
         auth_layout.addWidget(self.auth_token_input)
+        settings_group.setLayout(auth_layout)
+        layout.addWidget(settings_group)
 
         # Button for selecting log file
         self.file_button = QPushButton("Select Logfile...", self)
@@ -113,7 +117,7 @@ class ListenbrainzWidget(QWidget):
         Opens a file dialog allowing the user to select a log file and configures the UI accordingly
         """
         file_dialog = QFileDialog(self)
-        file_dialog.setNameFilter("All Files (*);;Rockbox Scrobbler Log (*.log)")
+        file_dialog.setNameFilter("Rockbox Scrobbler Log (*.log);;All Files (*)")
         if file_dialog.exec_():
             selected_file = Path(file_dialog.selectedFiles()[0])
             if selected_file.exists():
