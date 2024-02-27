@@ -76,6 +76,7 @@ class ListenbrainzWidget(QWidget):
         self.auth_token_input.setToolTip(
             "Your personal auth token for ListenBrainz. Get it here: https://listenbrainz.org/settings/"
         )
+        self.auth_token_input.setEchoMode(QLineEdit.Password)
         if self.settings.value(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY):
             self.auth_token_input.setText(
                 self.settings.value(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY)
