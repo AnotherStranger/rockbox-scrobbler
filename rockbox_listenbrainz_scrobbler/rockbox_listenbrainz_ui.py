@@ -9,11 +9,11 @@ from PySide6 import QtWidgets
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import (
     QFileDialog,
+    QGroupBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
     QMessageBox,
-    QProgressBar,
     QPushButton,
     QTextEdit,
     QVBoxLayout,
@@ -49,6 +49,18 @@ def show_error(text: str):
     msg.exec()
 
 
+def show_info(text: str):
+    """
+    Display an error message with the given text
+    """
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.setText("Success")
+    msg.setInformativeText(text)
+    msg.setWindowTitle("Success")
+    msg.exec()
+
+
 class ListenbrainzWidget(QWidget):
     """
     Main GUI widget for the Rockbox Listenbrainz Scrobbler
@@ -65,8 +77,9 @@ class ListenbrainzWidget(QWidget):
         self.setLayout(layout)
 
         # Input field for auth token
+        settings_group = QGroupBox("Settings")
         auth_layout = QHBoxLayout()
-        layout.addLayout(auth_layout)
+        # layout.addLayout(auth_layout)
 
         auth_label = QLabel("Enter User Token:", self)
         auth_layout.addWidget(auth_label)
@@ -76,12 +89,15 @@ class ListenbrainzWidget(QWidget):
         self.auth_token_input.setToolTip(
             "Your personal auth token for ListenBrainz. Get it here: https://listenbrainz.org/settings/"
         )
+        self.auth_token_input.setEchoMode(QLineEdit.Password)
         if self.settings.value(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY):
             self.auth_token_input.setText(
                 self.settings.value(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY)
             )
 
         auth_layout.addWidget(self.auth_token_input)
+        settings_group.setLayout(auth_layout)
+        layout.addWidget(settings_group)
 
         # Button for selecting log file
         self.file_button = QPushButton("Select Logfile...", self)
@@ -98,10 +114,6 @@ class ListenbrainzWidget(QWidget):
         buttons_layout.addWidget(self.submit_button)
         layout.addLayout(buttons_layout)
 
-        # Progress bar
-        self.progress_bar = QProgressBar(self)
-        layout.addWidget(self.progress_bar)
-
         # Read-only text edit area
         self.text_edit = QTextEdit(self)
         self.text_edit.setReadOnly(True)
@@ -112,7 +124,7 @@ class ListenbrainzWidget(QWidget):
         Opens a file dialog allowing the user to select a log file and configures the UI accordingly
         """
         file_dialog = QFileDialog(self)
-        file_dialog.setNameFilter("All Files (*);;Rockbox Scrobbler Log (*.log)")
+        file_dialog.setNameFilter("Rockbox Scrobbler Log (*.log);;All Files (*)")
         if file_dialog.exec_():
             selected_file = Path(file_dialog.selectedFiles()[0])
             if selected_file.exists():
@@ -141,13 +153,10 @@ class ListenbrainzWidget(QWidget):
 
         try:
             scrobbles = read_rockbox_log(self.selected_file)
-            total_scrobbles = len(scrobbles)
-            self.progress_bar.setMaximum(total_scrobbles)
             client = ListenBrainzScrobbler(auth_token)
 
-            for i, scrobble in enumerate(scrobbles):
-                self.progress_bar.setValue(i + 1)
-                client.scrobble(scrobble)
+            client.scrobble_multiple(scrobbles)
+            show_info("Successfully uploaded your Listens.")
         except ValidationError:
             show_error(
                 "Could not parse the given File. Did you choose a Rockbox .scrobbler.log?"

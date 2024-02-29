@@ -5,7 +5,7 @@ from typing import Iterable, List
 
 from pylistenbrainz import Listen, ListenBrainz
 
-from rockbox_listenbrainz_scrobbler.model import ScrobblerEntry
+from rockbox_listenbrainz_scrobbler.model import ScrobblerEntry, SongRatingEnum
 
 
 class AbstractScrobbler(ABC):
@@ -79,4 +79,4 @@ def read_rockbox_log(
             scrobbles += [
                 ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
             ]
-    return scrobbles
+    return list(filter(lambda x: x.rating == SongRatingEnum.LISTENED, scrobbles))
