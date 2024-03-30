@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
 pylistenbrainz = "^0.5.1"
-typer = { extras = ["all"], version = "^0.9.0" }
+typer = { extras = ["all"], version = "^0.12.0" }
 pydantic = "^2.6.1"
 pyside6 = "^6.6.2"
 
