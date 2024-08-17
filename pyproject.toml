@@ -11,6 +11,7 @@ pylistenbrainz = "^0.5.1"
 typer = "^0.12.4"
 pydantic = "^2.8.2"
 pyside6 = "^6.7.2"
+troi = {extras = ["nmslib"], version = "^2024.4.26.0"}
 
 [tool.poetry.scripts]
 rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
