@@ -1,3 +1,22 @@
+## [1.2.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.4...v1.2.0) (2024-02-29)
+
+
+### Features
+
+* :recycle: add settings group ([1ba530d](https://github.com/AnotherStranger/rockbox-scrobbler/commit/1ba530d920f7599cd3dd51692792756b39435a6a))
+* first readme draft ([2a59cb8](https://github.com/AnotherStranger/rockbox-scrobbler/commit/2a59cb8504f8b8a1a22d55bf725cbf6d6a2753bc))
+
+
+### Bug Fixes
+
+* :bug: avoid rate limiting by submitting multiple. Filter listens before upload. ([580fb8f](https://github.com/AnotherStranger/rockbox-scrobbler/commit/580fb8fbc292d70b75833fb220f925d4eb861b2b))
+
+
+### Code Refactoring
+
+* :recycle update renovate config. Only update against dev. ([420395d](https://github.com/AnotherStranger/rockbox-scrobbler/commit/420395d4adb4eac6a97306c679c935f61fa701ac))
+* hide token text in input field ([cba4ab6](https://github.com/AnotherStranger/rockbox-scrobbler/commit/cba4ab6e32e5a20a843ccacbf30d7e9ee3b18ba1))
+
 ## [1.1.4](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.3...v1.1.4) (2024-02-25)
 
 
