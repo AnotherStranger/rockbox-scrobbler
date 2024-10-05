@@ -19,7 +19,7 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.2.6"
 black = "^24.8.0"
-pre-commit = "^3.8.0"
+pre-commit = "^4.0.0"
 nuitka = "^2.4.7"
 
 [build-system]
