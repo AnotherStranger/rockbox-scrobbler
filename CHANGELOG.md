@@ -1,3 +1,18 @@
+## [1.2.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.2.0...v1.2.1) (2024-08-17)
+
+### Build System
+
+* **deps:** update dependency nuitka to v2.0.5 ([94f64c4](https://github.com/AnotherStranger/rockbox-scrobbler/commit/94f64c45983749ee468cb9be99542e8b3407eaa1))
+* **deps:** update dependency nuitka to v2.3.11 ([1b1e563](https://github.com/AnotherStranger/rockbox-scrobbler/commit/1b1e563ef68100d4c231d6bc6dd518ed52c241be))
+
+### Bug Fixes
+
+* **deps:** update dependency pydantic to v2.8.2 ([f7dccfe](https://github.com/AnotherStranger/rockbox-scrobbler/commit/f7dccfe7dcc12ec943ae87cdcae9649264cae18b))
+
+### Code Refactoring
+
+* update dependencies ([8514180](https://github.com/AnotherStranger/rockbox-scrobbler/commit/85141809d798ded18bb2efe428c4268389aa0cb4))
+
 ## [1.2.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.1.4...v1.2.0) (2024-02-29)
 
 
