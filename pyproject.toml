@@ -6,7 +6,7 @@ authors = ["André Büsgen <andre.buesgen@posteo.de>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.13"
+python = ">=3.13,<3.14"
 pylistenbrainz = "^0.5.1"
 typer = "^0.13.0"
 pydantic = "^2.8.2"
