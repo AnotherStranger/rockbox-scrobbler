@@ -4,8 +4,8 @@ from pydantic import AliasChoices, BaseModel, Field
 
 
 class SongRatingEnum(str, Enum):
-    LISTENED: str = "L"
-    SKIPPED: str = "S"
+    LISTENED = "L"
+    SKIPPED = "S"
 
 
 class ScrobblerEntry(BaseModel):
