@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from pydantic import ValidationError
 from PySide6 import QtWidgets
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import (
@@ -170,13 +169,15 @@ class ListenbrainzWidget(QWidget):
             client.scrobble_multiple(scrobbles)
 
             if len(errors) == 0:
-                show_info("Successfully uploaded your Listens.")
+                show_info(f"Successfully uploaded {len(scrobbles)} Listens.")
+            elif len(scrobbles) > 0:
+                show_warning(
+                    f"Could not upload {len(errors)} listens. Successfully uploaded {len(scrobbles)} Listens."
+                )
             else:
-                show_warning(f"Could not upload {len(errors)} listens.")
-        except ValidationError:
-            show_error(
-                "Could not parse the given File. Did you choose a Rockbox .scrobbler.log?"
-            )
+                show_error(
+                    "Could not parse the given File. Did you choose a Rockbox .scrobbler.log?"
+                )
         except InvalidAuthTokenException:
             show_error("The given auth token is invalid.")
         except InvalidSubmitListensPayloadException:
