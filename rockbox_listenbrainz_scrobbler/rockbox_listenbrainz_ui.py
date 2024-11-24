@@ -61,6 +61,18 @@ def show_info(text: str):
     msg.exec()
 
 
+def show_warning(text: str):
+    """
+    Display an error message with the given text
+    """
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Icon.Warning)
+    msg.setText("Warning")
+    msg.setInformativeText(text)
+    msg.setWindowTitle("Warning")
+    msg.exec()
+
+
 class ListenbrainzWidget(QWidget):
     """
     Main GUI widget for the Rockbox Listenbrainz Scrobbler
@@ -152,11 +164,15 @@ class ListenbrainzWidget(QWidget):
         self.settings.setValue(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY, auth_token)
 
         try:
-            scrobbles = read_rockbox_log(self.selected_file)
+            scrobbles, errors = read_rockbox_log(self.selected_file)
             client = ListenBrainzScrobbler(auth_token)
 
             client.scrobble_multiple(scrobbles)
-            show_info("Successfully uploaded your Listens.")
+
+            if len(errors) == 0:
+                show_info("Successfully uploaded your Listens.")
+            else:
+                show_warning(f"Could not upload {len(errors)} listens.")
         except ValidationError:
             show_error(
                 "Could not parse the given File. Did you choose a Rockbox .scrobbler.log?"

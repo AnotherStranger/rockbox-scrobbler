@@ -4,7 +4,7 @@ import time
 from abc import ABC, abstractmethod
 from itertools import batched
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable, List, Tuple
 from urllib.parse import urljoin
 
 import requests
@@ -95,8 +95,9 @@ class ListenBrainzScrobbler(AbstractScrobbler):
 
 def read_rockbox_log(
     rockbox_scrobbler_log_path: Path, listening_from: str = "rockbox"
-) -> List[ScrobblerEntry]:
+) -> Tuple[List[ScrobblerEntry], List[ValidationError]]:
     scrobbles = []
+    validation_errors = []
     with rockbox_scrobbler_log_path.open(
         "r",
         encoding="utf8",
@@ -119,8 +120,15 @@ def read_rockbox_log(
             ],
         )
         for row in reader:
-            print(row)
-            scrobbles += [
-                ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
-            ]
-    return list(filter(lambda x: x.rating == SongRatingEnum.LISTENED, scrobbles))
+            try:
+                scrobbles += [
+                    ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
+                ]
+            except ValidationError as err:
+                logging.error(f"Could not parse row {row}: {err}")
+                validation_errors.append(err)
+
+    return (
+        list(filter(lambda x: x.rating == SongRatingEnum.LISTENED, scrobbles)),
+        validation_errors,
+    )
