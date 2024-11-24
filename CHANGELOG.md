@@ -1,3 +1,37 @@
+## [1.3.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.2.1...v1.3.0) (2024-11-24)
+
+### Build System
+
+* **deps:** lock file maintenance ([d6dd3b4](https://github.com/AnotherStranger/rockbox-scrobbler/commit/d6dd3b4079b1cef36714fae2dac822466577f0b2))
+* **deps:** update dependency black to v24.10.0 ([31fd688](https://github.com/AnotherStranger/rockbox-scrobbler/commit/31fd688323cbcd6533a8775316fb35b3b5579533))
+* **deps:** update dependency nuitka to v2.5.1 ([ac02fb0](https://github.com/AnotherStranger/rockbox-scrobbler/commit/ac02fb04e8046cdb992e40d153461bceea4d2072))
+* **deps:** update dependency pre-commit to v4 ([30de98e](https://github.com/AnotherStranger/rockbox-scrobbler/commit/30de98e9fcd75885a3b462db2d2f154cb95d04f5))
+* **deps:** update dependency pylint to v3.3.1 ([e78174b](https://github.com/AnotherStranger/rockbox-scrobbler/commit/e78174bd45ba6ba978294d7fda5bde0f19be93e8))
+* update lockfile ([17b216f](https://github.com/AnotherStranger/rockbox-scrobbler/commit/17b216f576b0f172b2fb80299a2f36586274363a))
+
+### Features
+
+* initial implementation for manual api calls ([04d6e89](https://github.com/AnotherStranger/rockbox-scrobbler/commit/04d6e892f46e83d42c04daa18da72776f9f14029))
+
+### Bug Fixes
+
+* :bug: do not set missing metadata ([d8d7b43](https://github.com/AnotherStranger/rockbox-scrobbler/commit/d8d7b43fb478b7f086197b57bb9737d3ec58b20f))
+* **deps:** update dependency pydantic to v2.10.1 ([9c169bb](https://github.com/AnotherStranger/rockbox-scrobbler/commit/9c169bb2d6e1daf486701617b5106e27665bcc2e))
+* **deps:** update dependency pyside6 to v6.8.0 ([5305e76](https://github.com/AnotherStranger/rockbox-scrobbler/commit/5305e760f6cef6d4e2839232cf7c5fe70a406480))
+* **deps:** update dependency typer to ^0.13.0 ([8af4b2e](https://github.com/AnotherStranger/rockbox-scrobbler/commit/8af4b2eba5e9917cdcd32bec36bd41d210592f7e))
+* **deps:** update dependency typer to v0.13.1 ([346211c](https://github.com/AnotherStranger/rockbox-scrobbler/commit/346211c328833c5bf162313fe6845de834f9da9c))
+* **deps:** update python to >=3.13,<3.14 ([f6769a7](https://github.com/AnotherStranger/rockbox-scrobbler/commit/f6769a72ccdc74b530b77ac8e092b942da9ca84a))
+* update python version in CI ([c0c0398](https://github.com/AnotherStranger/rockbox-scrobbler/commit/c0c039814f171f2c2e6faece34ae61ddd81e1370))
+* use correct nuitka build flags ([08572f3](https://github.com/AnotherStranger/rockbox-scrobbler/commit/08572f302b90f329809ae056345eaeb01e6a9fa8))
+* use old-stlye typevar ([35aed0c](https://github.com/AnotherStranger/rockbox-scrobbler/commit/35aed0c962c20107a7a7125b6786baac962b51ed))
+
+### Code Refactoring
+
+* add cache cleanup ([2f89365](https://github.com/AnotherStranger/rockbox-scrobbler/commit/2f89365ac5c1ebfeb7275cf68831c8faac3b6111))
+* Show more Information after scrobbling ([536a823](https://github.com/AnotherStranger/rockbox-scrobbler/commit/536a823e8468b6099be8ea8a5a68570cf3184e86))
+* Skip lines with validation errors ([daeedad](https://github.com/AnotherStranger/rockbox-scrobbler/commit/daeedadb3c4e45d3d191c4396d046576e7e141f2))
+* use renovate best practices preset ([4b3d790](https://github.com/AnotherStranger/rockbox-scrobbler/commit/4b3d790d2103541fdf9dc87c02efec60f706bfd9))
+
 ## [1.2.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.2.0...v1.2.1) (2024-08-17)
 
 ### Build System
