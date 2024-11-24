@@ -1,6 +1,6 @@
 from collections.abc import Callable
 from enum import Enum
-from typing import List, Optional, Set
+from typing import List, Optional, Set, TypeVar
 
 from pydantic import BaseModel, model_validator
 from typing_extensions import Annotated
@@ -28,8 +28,10 @@ MAX_TAG_SIZE = 64
 # The minimum acceptable value for listened_at field
 LISTEN_MINIMUM_TS = 1033430400
 
+T = TypeVar("T", bound=BaseModel)
 
-def validate_max_size[T: BaseModel](max_size) -> Callable[[T], T]:
+
+def validate_max_size(max_size) -> Callable[[T], T]:
     def validator(model: T):
         json_data = model.model_dump_json().encode(encoding="utf8")
         if len(json_data) > max_size:
@@ -41,7 +43,7 @@ def validate_max_size[T: BaseModel](max_size) -> Callable[[T], T]:
     return validator
 
 
-def ensure_empty_as_none(cls, value):
+def ensure_empty_as_none(value):
     if value is None:
         return value
 
