@@ -6,11 +6,11 @@ authors = ["André Büsgen <andre.buesgen@posteo.de>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.13"
-pylistenbrainz = "^0.5.1"
-typer = "^0.12.4"
+python = ">=3.13,<3.14"
+typer = "^0.13.0"
 pydantic = "^2.8.2"
 pyside6 = "^6.7.2"
+requests = "^2.32.3"
 
 [tool.poetry.scripts]
 rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
@@ -19,8 +19,9 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.2.6"
 black = "^24.8.0"
-pre-commit = "^3.8.0"
+pre-commit = "^4.0.0"
 nuitka = "^2.4.7"
+types-requests = "^2.32.0.20241016"
 
 [build-system]
 requires = ["poetry-core"]
