@@ -1,10 +1,24 @@
 import csv
+import logging
+import time
 from abc import ABC, abstractmethod
+from itertools import batched
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable, List, Tuple
+from urllib.parse import urljoin
 
-from pylistenbrainz import Listen, ListenBrainz
+import requests
+from pydantic import ValidationError
+from requests.models import HTTPError
 
+from rockbox_listenbrainz_scrobbler.api_model import (
+    MAX_LISTENS_PER_REQUEST,
+    SubmitListens,
+)
+from rockbox_listenbrainz_scrobbler.exceptions import (
+    InvalidAuthTokenException,
+    InvalidSubmitListensPayloadException,
+)
 from rockbox_listenbrainz_scrobbler.model import ScrobblerEntry, SongRatingEnum
 
 
@@ -17,7 +31,7 @@ class AbstractScrobbler(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def scrobble_multiple(self, entry: Iterable[ScrobblerEntry]) -> None:
+    def scrobble_multiple(self, entries: Iterable[ScrobblerEntry]) -> None:
         """
         Scrobble multiple songs to your Endpoint
         """
@@ -25,35 +39,65 @@ class AbstractScrobbler(ABC):
 
 
 class ListenBrainzScrobbler(AbstractScrobbler):
-    def __init__(self, auth_token: str) -> None:
+    def __init__(
+        self, auth_token: str, base_url="https://api.listenbrainz.org"
+    ) -> None:
         super().__init__()
 
-        self.client = ListenBrainz()
-        self.client.set_auth_token(auth_token)
+        self.base_url = base_url
+        self.auth_token = auth_token
+        self.headers = {"Authorization": "Token {0}".format(self.auth_token)}
 
     def scrobble(self, entry: ScrobblerEntry) -> None:
         return self.scrobble_multiple([entry])
 
-    def scrobble_multiple(self, entry: Iterable[ScrobblerEntry]) -> None:
-        listens = [
-            Listen(
-                track_name=listen.title,
-                artist_name=listen.artist,
-                release_name=listen.album,
-                listened_at=listen.timestamp,
-                recording_mbid=listen.musicbrainz_trackid,
-                listening_from=listen.listening_from,
-            )
-            for listen in entry
-        ]
+    def scrobble_multiple(
+        self,
+        entries: Iterable[ScrobblerEntry],
+        batchsize: int = MAX_LISTENS_PER_REQUEST,
+    ) -> None:
+        for batch in batched(entries, n=batchsize):
+            current_batch = list(batch)
 
-        self.client.submit_multiple_listens(listens)
+            try:
+                api_request = SubmitListens.from_scrobbler_entries(current_batch)
+                response = requests.post(
+                    urljoin(self.base_url, "/1/submit-listens"),
+                    json=api_request.model_dump(exclude_unset=True, exclude_none=True),
+                    headers=self.headers,
+                )
+                if response.status_code != 200:
+                    logging.error(
+                        f"Could not submit listens. Reason: {response.json()}"
+                    )
+
+                if response.status_code == 401:
+                    raise InvalidAuthTokenException("Invalid Auth Token.")
+                elif response.status_code == 400:
+                    raise InvalidSubmitListensPayloadException(
+                        f"Invalid Payload: {response.json()}"
+                    )
+                elif response.status_code != 200:
+                    raise HTTPError(response)
+
+                remaining_calls = int(response.headers["X-RateLimit-Remaining"])
+                ratelimit_reset = int(response.headers["X-RateLimit-Reset-In"])
+                if remaining_calls == 0:
+                    time.sleep(ratelimit_reset)
+
+            except ValidationError as err:
+                logging.error(
+                    f"Payload too large. Trying smaller batchsize...\nReason: {err}"
+                )
+                if batchsize >= 2:
+                    self.scrobble_multiple(current_batch, int(len(current_batch) / 2))
 
 
 def read_rockbox_log(
     rockbox_scrobbler_log_path: Path, listening_from: str = "rockbox"
-) -> List[ScrobblerEntry]:
+) -> Tuple[List[ScrobblerEntry], List[ValidationError]]:
     scrobbles = []
+    validation_errors = []
     with rockbox_scrobbler_log_path.open(
         "r",
         encoding="utf8",
@@ -76,7 +120,15 @@ def read_rockbox_log(
             ],
         )
         for row in reader:
-            scrobbles += [
-                ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
-            ]
-    return list(filter(lambda x: x.rating == SongRatingEnum.LISTENED, scrobbles))
+            try:
+                scrobbles += [
+                    ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
+                ]
+            except ValidationError as err:
+                logging.error(f"Could not parse row {row}: {err}")
+                validation_errors.append(err)
+
+    return (
+        list(filter(lambda x: x.rating == SongRatingEnum.LISTENED, scrobbles)),
+        validation_errors,
+    )

@@ -24,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.13'
 
       - name: Install Poetry
         run: |
@@ -40,7 +40,7 @@ jobs:
           nuitka-version: main
           enable-plugins: pyside6
           script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz_ui.py
-          onefile: true
+          mode: onefile
 
       - name: Zip Artifacts
         if: runner.os == 'Windows'
@@ -76,7 +76,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.13'
 
       - name: Install Poetry
         run: |
