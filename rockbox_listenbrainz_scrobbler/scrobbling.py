@@ -9,10 +9,15 @@ from urllib.parse import urljoin
 
 import requests
 from pydantic import ValidationError
+from requests.models import HTTPError
 
 from rockbox_listenbrainz_scrobbler.api_model import (
     MAX_LISTENS_PER_REQUEST,
     SubmitListens,
+)
+from rockbox_listenbrainz_scrobbler.exceptions import (
+    InvalidAuthTokenException,
+    InvalidSubmitListensPayloadException,
 )
 from rockbox_listenbrainz_scrobbler.model import ScrobblerEntry, SongRatingEnum
 
@@ -56,14 +61,27 @@ class ListenBrainzScrobbler(AbstractScrobbler):
 
             try:
                 api_request = SubmitListens.from_scrobbler_entries(current_batch)
-                result = requests.post(
+                response = requests.post(
                     urljoin(self.base_url, "/1/submit-listens"),
-                    data=api_request.model_dump(),
+                    json=api_request.model_dump(exclude_unset=True, exclude_none=True),
                     headers=self.headers,
                 )
+                if response.status_code != 200:
+                    logging.error(
+                        f"Could not submit listens. Reason: {response.json()}"
+                    )
 
-                remaining_calls = int(result.headers["X-RateLimit-Remaining"])
-                ratelimit_reset = int(result.headers["X-RateLimit-Reset-In"])
+                if response.status_code == 401:
+                    raise InvalidAuthTokenException("Invalid Auth Token.")
+                elif response.status_code == 400:
+                    raise InvalidSubmitListensPayloadException(
+                        f"Invalid Payload: {response.json()}"
+                    )
+                elif response.status_code != 200:
+                    raise HTTPError(response)
+
+                remaining_calls = int(response.headers["X-RateLimit-Remaining"])
+                ratelimit_reset = int(response.headers["X-RateLimit-Reset-In"])
                 if remaining_calls == 0:
                     time.sleep(ratelimit_reset)
 
@@ -101,6 +119,7 @@ def read_rockbox_log(
             ],
         )
         for row in reader:
+            print(row)
             scrobbles += [
                 ScrobblerEntry(**{**row, **{"listening_from": listening_from}})
             ]

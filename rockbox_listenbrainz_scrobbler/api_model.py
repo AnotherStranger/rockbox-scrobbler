@@ -41,6 +41,17 @@ def validate_max_size[T: BaseModel](max_size) -> Callable[[T], T]:
     return validator
 
 
+def ensure_empty_as_none(cls, value):
+    if value is None:
+        return value
+
+    if len(value.strip()) == 0:
+        return None
+
+    return value
+
+
+StringValidator = Annotated[Optional[str], ensure_empty_as_none]
 PayloadValidator = Annotated[
     "ListenPayload", validate_max_size(MAX_LISTEN_PAYLOAD_SIZE)
 ]
@@ -54,22 +65,22 @@ class ListenType(str, Enum):
 
 class AdditionalInfo(BaseModel):
     artist_mbids: Optional[List[str]] = None
-    release_group_mbid: Optional[str] = None
-    release_mbid: Optional[str] = None
-    recording_mbid: Optional[str] = None
-    track_mbid: Optional[str] = None
+    release_group_mbid: StringValidator = None
+    release_mbid: StringValidator = None
+    recording_mbid: StringValidator = None
+    track_mbid: StringValidator = None
     work_mbids: Optional[List[str]] = None
     tracknumber: Optional[int] = None
-    isrc: Optional[str] = None
-    spotify_id: Optional[str] = None
+    isrc: StringValidator = None
+    spotify_id: StringValidator = None
     tags: Optional[Set[str]] = None
-    media_player: Optional[str] = "Rockbox"
-    media_player_version: Optional[str] = None
-    submission_client: Optional[str] = "Rockbox Scrobbler"
-    submission_client_version: Optional[str] = __version__
-    music_service: Optional[str] = None
-    music_service_name: Optional[str] = None
-    origin_url: Optional[str] = None
+    media_player: StringValidator = "Rockbox"
+    media_player_version: StringValidator = None
+    submission_client: StringValidator = "Rockbox Scrobbler"
+    submission_client_version: StringValidator = __version__
+    music_service: StringValidator = None
+    music_service_name: StringValidator = None
+    origin_url: StringValidator = None
     duration_ms: Optional[int] = None
     duration: Optional[int] = None
 
@@ -77,7 +88,7 @@ class AdditionalInfo(BaseModel):
 class TrackMetadata(BaseModel):
     artist_name: str
     track_name: str
-    release_name: Optional[str] = None
+    release_name: StringValidator = None
     additional_info: Optional[AdditionalInfo] = None
 
 

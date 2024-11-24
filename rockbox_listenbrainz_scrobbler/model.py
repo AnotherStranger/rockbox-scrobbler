@@ -1,6 +1,7 @@
 from enum import Enum
+from typing import Optional
 
-from pydantic import AliasChoices, BaseModel, Field
+from pydantic import AliasChoices, BaseModel, Field, field_validator
 
 
 class SongRatingEnum(str, Enum):
@@ -16,7 +17,19 @@ class ScrobblerEntry(BaseModel):
     length: int = Field(validation_alias=AliasChoices("length", "#LENGTH"))
     rating: SongRatingEnum = Field(validation_alias=AliasChoices("rating", "#RATING"))
     timestamp: int = Field(validation_alias=AliasChoices("timestamp", "#TIMESTAMP"))
-    musicbrainz_trackid: str = Field(
-        validation_alias=AliasChoices("musicbrainz_trackid", "#MUSICBRAINZ_TRACKID")
+    musicbrainz_trackid: Optional[str] = Field(
+        None,
+        validation_alias=AliasChoices("musicbrainz_trackid", "#MUSICBRAINZ_TRACKID"),
     )
     listening_from: str = "rockbox"
+
+    @field_validator("musicbrainz_trackid")
+    @classmethod
+    def ensure_empy_as_none(cls, value):
+        if value is None:
+            return value
+
+        if len(value.strip()) == 0:
+            return None
+
+        return value

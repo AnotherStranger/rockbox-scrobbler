@@ -1,10 +1,6 @@
 from pathlib import Path
 
 from pydantic import ValidationError
-from pylistenbrainz.errors import (
-    InvalidAuthTokenException,
-    InvalidSubmitListensPayloadException,
-)
 from PySide6 import QtWidgets
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import (
@@ -20,6 +16,10 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from rockbox_listenbrainz_scrobbler.exceptions import (
+    InvalidAuthTokenException,
+    InvalidSubmitListensPayloadException,
+)
 from rockbox_listenbrainz_scrobbler.scrobbling import (
     ListenBrainzScrobbler,
     read_rockbox_log,
@@ -42,7 +42,7 @@ def show_error(text: str):
     Display an error message with the given text
     """
     msg = QMessageBox()
-    msg.setIcon(QMessageBox.Critical)
+    msg.setIcon(QMessageBox.Icon.Critical)
     msg.setText("Error")
     msg.setInformativeText(text)
     msg.setWindowTitle("Error")
@@ -54,7 +54,7 @@ def show_info(text: str):
     Display an error message with the given text
     """
     msg = QMessageBox()
-    msg.setIcon(QMessageBox.Information)
+    msg.setIcon(QMessageBox.Icon.Information)
     msg.setText("Success")
     msg.setInformativeText(text)
     msg.setWindowTitle("Success")
@@ -89,7 +89,7 @@ class ListenbrainzWidget(QWidget):
         self.auth_token_input.setToolTip(
             "Your personal auth token for ListenBrainz. Get it here: https://listenbrainz.org/settings/"
         )
-        self.auth_token_input.setEchoMode(QLineEdit.Password)
+        self.auth_token_input.setEchoMode(QLineEdit.EchoMode.Password)
         if self.settings.value(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY):
             self.auth_token_input.setText(
                 self.settings.value(LISTENBRAINZ_AUTH_TOKEN_SETTING_KEY)
