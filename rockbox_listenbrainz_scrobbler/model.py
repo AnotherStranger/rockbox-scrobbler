@@ -25,7 +25,7 @@ class ScrobblerEntry(BaseModel):
 
     @field_validator("musicbrainz_trackid")
     @classmethod
-    def ensure_empy_as_none(cls, value):
+    def ensure_empty_as_none(cls, value):
         if value is None:
             return value
 

@@ -19,10 +19,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
           python-version: '3.13'
 
@@ -40,18 +40,20 @@ jobs:
           nuitka-version: main
           enable-plugins: pyside6
           script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz_ui.py
-          mode: onefile
+          mode: standalone
+          static-libpython: auto
+          lto: auto
 
       - name: Zip Artifacts
         if: runner.os == 'Windows'
-        run: Compress-Archive -Path build/*.exe, build/*.bin, build/*.app -DestinationPath ${{ runner.os }}-artifacts.zip
+        run: Compress-Archive -Path build/*.dist -DestinationPath ${{ runner.os }}-artifacts.zip
 
       - name: Zip Artifacts
         if: runner.os != 'Windows'
-        run: zip -r ${{ runner.os }}-artifacts.zip build/*.exe build/*.bin build/*.app/*
+        run: zip -r ${{ runner.os }}-artifacts.zip build/*.dist
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
         with:
           name: ${{ runner.os }} Build
           path: ${{ runner.os }}-artifacts.zip
@@ -65,16 +67,16 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
         with:
           path: artifacts/
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
           python-version: '3.13'
 
@@ -87,7 +89,7 @@ jobs:
         run: poetry install
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
         with:
           node-version: "lts/*"
       - name: Release
