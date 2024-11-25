@@ -41,8 +41,8 @@ jobs:
           enable-plugins: pyside6
           script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz_ui.py
           mode: onefile
-          static-libpython: yes
-          lto: yes
+          static-libpython: auto
+          lto: auto
 
       - name: Zip Artifacts
         if: runner.os == 'Windows'
