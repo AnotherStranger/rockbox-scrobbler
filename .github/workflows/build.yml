@@ -40,17 +40,17 @@ jobs:
           nuitka-version: main
           enable-plugins: pyside6
           script-name: rockbox_listenbrainz_scrobbler/rockbox_listenbrainz_ui.py
-          mode: onefile
+          mode: standalone
           static-libpython: auto
           lto: auto
 
       - name: Zip Artifacts
         if: runner.os == 'Windows'
-        run: Compress-Archive -Path build/*.exe, build/*.bin, build/*.app -DestinationPath ${{ runner.os }}-artifacts.zip
+        run: Compress-Archive -Path build/*.dist -DestinationPath ${{ runner.os }}-artifacts.zip
 
       - name: Zip Artifacts
         if: runner.os != 'Windows'
-        run: zip -r ${{ runner.os }}-artifacts.zip build/*.exe build/*.bin build/*.app/*
+        run: zip -r ${{ runner.os }}-artifacts.zip build/*.dist
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
