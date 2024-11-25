@@ -1,3 +1,20 @@
+## [1.3.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.0...v1.3.1) (2024-11-25)
+
+### Build System
+
+* **deps:** lock file maintenance ([97b9219](https://github.com/AnotherStranger/rockbox-scrobbler/commit/97b92196a9213f4476693c49f460158c1462c87a))
+* **deps:** pin dependencies ([67a029e](https://github.com/AnotherStranger/rockbox-scrobbler/commit/67a029e5b47f994bea805d826b0e6b956704a5c1))
+* **deps:** update dependency nuitka to v2.5.3 ([c853568](https://github.com/AnotherStranger/rockbox-scrobbler/commit/c8535689d8e736a34a7fb484a95a0425f802852b))
+
+### Bug Fixes
+
+* typo ([da1f694](https://github.com/AnotherStranger/rockbox-scrobbler/commit/da1f694738409d5cf679830bac498091bdd4eb0a))
+
+### Code Refactoring
+
+* try to use standalone mode ([b977bf1](https://github.com/AnotherStranger/rockbox-scrobbler/commit/b977bf1e098761d74c90b146ad6a6d224d71d17b))
+* use static-libpython and lto ([b94ea44](https://github.com/AnotherStranger/rockbox-scrobbler/commit/b94ea4435581ccb09c3cc303c6e38afd10e44e3c))
+
 ## [1.3.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.2.1...v1.3.0) (2024-11-24)
 
 ### Build System
