@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.13,<3.14"
-typer = "^0.13.0"
+typer = "^0.14.0"
 pydantic = "^2.8.2"
 pyside6 = "^6.7.2"
 requests = "^2.32.3"
