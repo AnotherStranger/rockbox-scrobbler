@@ -1,3 +1,25 @@
+## [1.3.2](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.1...v1.3.2) (2025-01-13)
+
+### Build System
+
+* **deps:** lock file maintenance ([bd2d16a](https://github.com/AnotherStranger/rockbox-scrobbler/commit/bd2d16a38c0474fdea87bc52e6ec6da3c9ea6ee5))
+* **deps:** update actions/upload-artifact digest to 65c4c4a ([edb812c](https://github.com/AnotherStranger/rockbox-scrobbler/commit/edb812cdcf6b41e0155e49ce8f54c0fb8c635a48))
+* **deps:** update dependency nuitka to v2.5.4 ([e650e1c](https://github.com/AnotherStranger/rockbox-scrobbler/commit/e650e1cc5eab53d6bf8c97beffa4a19c8512a456))
+* **deps:** update dependency nuitka to v2.5.6 ([0016214](https://github.com/AnotherStranger/rockbox-scrobbler/commit/00162144c61e70d9367a4c809d7a837f4b46a9a6))
+* **deps:** update dependency nuitka to v2.5.9 ([5decb80](https://github.com/AnotherStranger/rockbox-scrobbler/commit/5decb804948ef52975becef4c59753fc79da911e))
+* **deps:** update dependency pylint to v3.3.2 ([9e09773](https://github.com/AnotherStranger/rockbox-scrobbler/commit/9e09773f6f3c44983a5661cab6609af495f86970))
+* **deps:** update dependency pylint to v3.3.3 ([414df1f](https://github.com/AnotherStranger/rockbox-scrobbler/commit/414df1f6b5a447dd6ece7aeeb86638fea556094f))
+
+### Bug Fixes
+
+* **deps:** update dependency pydantic to v2.10.2 ([d0d030b](https://github.com/AnotherStranger/rockbox-scrobbler/commit/d0d030b0f7220de0c7ea62049814940f211afa83))
+* **deps:** update dependency pydantic to v2.10.3 ([0c2a954](https://github.com/AnotherStranger/rockbox-scrobbler/commit/0c2a954754f248d475c4f1eb300dd84951e6bdec))
+* **deps:** update dependency pydantic to v2.10.4 ([6881bbe](https://github.com/AnotherStranger/rockbox-scrobbler/commit/6881bbe2000da24bf1c2c4bd28d02b7e6e8b495a))
+* **deps:** update dependency pydantic to v2.10.5 ([5b2ac02](https://github.com/AnotherStranger/rockbox-scrobbler/commit/5b2ac02ba98ac3d8bad01a87bccef5a8bd22015f))
+* **deps:** update dependency typer to ^0.14.0 ([4cca421](https://github.com/AnotherStranger/rockbox-scrobbler/commit/4cca421811512b46d9d8c6ea1eb4cf28ca92abe7))
+* **deps:** update dependency typer to ^0.15.0 ([5db8708](https://github.com/AnotherStranger/rockbox-scrobbler/commit/5db8708c905c27ce4d625a0442c8e09014dd22f9))
+* **deps:** update dependency typer to v0.15.1 ([969eda0](https://github.com/AnotherStranger/rockbox-scrobbler/commit/969eda0c48f7c3ee09656eef97a61dcdff0ef3d2))
+
 ## [1.3.1](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.0...v1.3.1) (2024-11-25)
 
 ### Build System
