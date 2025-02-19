@@ -1,3 +1,19 @@
+## [1.3.3](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.2...v1.3.3) (2025-02-19)
+
+### Build System
+
+* **deps:** lock file maintenance ([5f3420a](https://github.com/AnotherStranger/rockbox-scrobbler/commit/5f3420a6d28c02ae09900ad7f07dcc0f35fb1eb0))
+* **deps:** pin dependencies ([c77fbcc](https://github.com/AnotherStranger/rockbox-scrobbler/commit/c77fbccf05e31f8f83355c372d7cb799aa4eadc1))
+* **deps:** update actions/setup-node digest to 1d0ff46 ([95a54db](https://github.com/AnotherStranger/rockbox-scrobbler/commit/95a54db984d688b11cfb0385a5be82120740e0c9))
+* **deps:** update actions/setup-python digest to 4237552 ([7eeeed5](https://github.com/AnotherStranger/rockbox-scrobbler/commit/7eeeed5ee90b281a5e59954d28b8cd57a3d8a247))
+* **deps:** update dependency black to v25 ([2d7f510](https://github.com/AnotherStranger/rockbox-scrobbler/commit/2d7f510fc56702e37d6f41bd58a299e839822fc3))
+* **deps:** update dependency nuitka to v2.6.6 ([0e746a6](https://github.com/AnotherStranger/rockbox-scrobbler/commit/0e746a682a8415a2b5cc001120cf54ce04268335))
+* **deps:** update dependency pylint to v3.3.4 ([aa8f3a4](https://github.com/AnotherStranger/rockbox-scrobbler/commit/aa8f3a4529d0f142c27eda496319d1473561a19c))
+
+### Bug Fixes
+
+* **deps:** update dependency pydantic to v2.10.6 ([d1139ea](https://github.com/AnotherStranger/rockbox-scrobbler/commit/d1139ea6ea58fd473a5def30d96ca71017d35099))
+
 ## [1.3.2](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.1...v1.3.2) (2025-01-13)
 
 ### Build System
