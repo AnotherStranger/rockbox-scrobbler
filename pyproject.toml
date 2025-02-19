@@ -17,10 +17,10 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^3.2.6"
-black = "^24.8.0"
-pre-commit = "^4.0.0"
-nuitka = "^2.4.7"
+pylint = "3.3.3"
+black = "24.10.0"
+pre-commit = "4.0.1"
+nuitka = "2.5.9"
 types-requests = "^2.32.0.20241016"
 
 [build-system]
