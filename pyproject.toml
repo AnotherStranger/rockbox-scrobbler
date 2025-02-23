@@ -20,7 +20,7 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 pylint = "3.3.4"
 black = "25.1.0"
 pre-commit = "4.0.1"
-nuitka = "2.6.6"
+nuitka = "2.6.7"
 types-requests = "^2.32.0.20241016"
 
 [build-system]
