@@ -2,7 +2,7 @@ default_stages:
   - pre-commit
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -16,7 +16,7 @@ repos:
           - --remove-all-unused-imports
           - --expand-star-imports
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+    rev: v1.19.1
     hooks:
       - id: mypy
         additional_dependencies:
@@ -46,7 +46,7 @@ repos:
           - pre-push
         pass_filenames: false
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.31.0
+    rev: v4.12.1
     hooks:
       - id: commitizen
         stages:
@@ -63,7 +63,7 @@ repos:
           - javascript
           - json
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 7.0.0
     hooks:
       - id: isort
         name: isort (python)
@@ -71,12 +71,12 @@ repos:
           - --profile
           - black
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: v0.8.0
+    rev: v0.14.14
     hooks:
       # Run the linter.
       - id: ruff
