@@ -1,3 +1,33 @@
+## [1.4.0](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.3...v1.4.0) (2026-01-24)
+
+### Build System
+
+* **deps-dev:** bump filelock from 3.17.0 to 3.20.3 ([b099aff](https://github.com/AnotherStranger/rockbox-scrobbler/commit/b099aff0c18d517d5aebd6cba97a56f7a2a52a8c))
+* **deps:** lock file maintenance ([2102aea](https://github.com/AnotherStranger/rockbox-scrobbler/commit/2102aea1a0b1e1525dad543570ba27ea7de3d40d))
+* **config:** migrate config renovate.json ([d0bcf90](https://github.com/AnotherStranger/rockbox-scrobbler/commit/d0bcf90db0ec33f17cc4a1993d9b0ce115c70229))
+* **deps:** pin dependency pylint to 4.0.4 ([e53c94d](https://github.com/AnotherStranger/rockbox-scrobbler/commit/e53c94d57a24acaca918c05067ef7045eac7c1ae))
+* **deps:** update actions/checkout action to v6 ([9a707c6](https://github.com/AnotherStranger/rockbox-scrobbler/commit/9a707c6d0184b21845aca8f8393314ec92db092d))
+* **deps:** update actions/setup-node action to v6 ([32d0ead](https://github.com/AnotherStranger/rockbox-scrobbler/commit/32d0eada59def09315bfd770269e160a8ebe2a55))
+* **deps:** update actions/setup-python action to v6 ([37a34d5](https://github.com/AnotherStranger/rockbox-scrobbler/commit/37a34d508f2395b6ce0d8cdfe0a707037832342b))
+* **deps:** update dependency black to v26 ([4ed5d9f](https://github.com/AnotherStranger/rockbox-scrobbler/commit/4ed5d9f141e91ce2fdf678340734dd5298cc990b))
+* **deps:** update dependency nuitka to v2.8.10 ([af194cb](https://github.com/AnotherStranger/rockbox-scrobbler/commit/af194cbe09885740b496eba3f67b51af07f93d7e))
+* **deps:** update github artifact actions ([055334b](https://github.com/AnotherStranger/rockbox-scrobbler/commit/055334beeb7bbf55cca8abe2e09dd9f63154132c))
+
+### Features
+
+* **renovate:** update renovate config with better presets ([b322331](https://github.com/AnotherStranger/rockbox-scrobbler/commit/b32233103435170ea41cf9294084f3baa05494b1))
+
+### Bug Fixes
+
+* **python:** revert to python 3.14 because nuitka fails on 3.14 ([c0782ca](https://github.com/AnotherStranger/rockbox-scrobbler/commit/c0782ca402abeb08af3803cf0a6b27cb3a736569))
+* **release:** set release job to python 3.13 ([0fcec03](https://github.com/AnotherStranger/rockbox-scrobbler/commit/0fcec038fa44955e5f74226d91aa660b85783eb2))
+* **deps:** update dependency pydantic to v2.11.5 ([#88](https://github.com/AnotherStranger/rockbox-scrobbler/issues/88)) ([d12e8e2](https://github.com/AnotherStranger/rockbox-scrobbler/commit/d12e8e2766ae01ab972db305baae18ea27b2141a))
+* **deps:** update python to v3.14.2 ([4831cfa](https://github.com/AnotherStranger/rockbox-scrobbler/commit/4831cfa191210317ee355c8820cfb60440943cf0))
+
+### Code Refactoring
+
+* **Update-dependencies:** Update pre-commit hooks and main deps ([8bd2c82](https://github.com/AnotherStranger/rockbox-scrobbler/commit/8bd2c82fe258227332f21e5e46857adb5b7cfff7))
+
 ## [1.3.3](https://github.com/AnotherStranger/rockbox-scrobbler/compare/v1.3.2...v1.3.3) (2025-02-19)
 
 ### Build System
