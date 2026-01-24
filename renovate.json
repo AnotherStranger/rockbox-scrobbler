@@ -1,23 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices"
+    "config:best-practices",
+    "workarounds:all",
+    "replacements:all",
+    "mergeConfidence:all-badges",
+    "helpers:pinGitHubActionDigests",
+    "helpers:githubDigestChangelogs"
   ],
-  "baseBranchPatterns": [
-    "dev"
-  ],
+  "baseBranchPatterns": ["dev"],
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
   },
   "packageRules": [
     {
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "matchCurrentVersion": "!/^0/",
-      "automerge": true
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "matchPackageNames": ["*"],
+      "matchUpdateTypes": ["minor", "patch", "digest"]
     }
   ]
 }
