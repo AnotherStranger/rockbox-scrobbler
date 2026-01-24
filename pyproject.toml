@@ -17,7 +17,7 @@ rockbox-listenbrainz = "rockbox_listenbrainz_scrobbler.cli:main"
 
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^4.0.4"
+pylint = "4.0.4"
 black = "26.1.0"
 pre-commit = "4.0.1"
 nuitka = "2.8.10"
