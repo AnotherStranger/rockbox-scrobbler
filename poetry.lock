@@ -410,18 +410,25 @@ files = [
 
 [[package]]
 name = "nuitka"
-version = "2.6.6"
+version = "2.8.10"
 description = "Python compiler with full language support and CPython compatibility"
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "Nuitka-2.6.6.tar.gz", hash = "sha256:4376fe46a5eea7db570266773fedf47329b6d529475900d2ba0dc8054e7f5aaf"},
+    {file = "nuitka-2.8.10.tar.gz", hash = "sha256:03e4d0756d8a11cb2627da3a2d9b518c802d031bf4f2c629e0a7b8c773497452"},
 ]
 
 [package.dependencies]
 ordered-set = ">=4.1.0"
 zstandard = ">=0.15"
+
+[package.extras]
+all = ["imageio", "setuptools (>=42)", "toml", "zstandard (>=0.15)"]
+app = ["zstandard (>=0.15)"]
+build-wheel = ["setuptools (>=42)", "toml", "wheel"]
+icon-conversion = ["imageio"]
+onefile = ["zstandard (>=0.15)"]
 
 [[package]]
 name = "ordered-set"
@@ -1189,4 +1196,4 @@ cffi = ["cffi (>=1.17,<2.0) ; platform_python_implementation != \"PyPy\" and pyt
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14,<3.15"
-content-hash = "f91cb2655b35a6f11d0a42f6889e359494e87f0575a83d2817d479733562ae1f"
+content-hash = "d62bfe9ca0f6d98a87aefb9bdc824d3f2ad79297bed1dbaf93b8dca00267003b"
