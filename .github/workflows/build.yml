@@ -35,7 +35,7 @@ jobs:
         run: poetry install
 
       - name: Build Executable
-        uses: Nuitka/Nuitka-Action@main
+        uses: Nuitka/Nuitka-Action@bb65ca8023bef5f41a2114acd387b5f36d860145 # main
         with:
           nuitka-version: main
           enable-plugins: pyside6
